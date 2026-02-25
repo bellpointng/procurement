@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bellpoint Energy – Procurement & Supply Chain</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1a3a5c;
+    --blue: #1e5fa8;
+    --blue-light: #2a7de1;
+    --orange: #e07b1a;
+    --green: #2e8b4a;
+    --teal: #1a7a9e;
+    --gray-light: #f4f6f9;
+    --gray-border: #dde2ea;
+    --text: #2b3a4a;
+    --text-light: #5a6a7a;
+    --white: #ffffff;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: var(--gray-light);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 24px;
+    height: 52px;
+  }
+  .topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  .logo-icon {
+    width: 34px; height: 34px;
+    background: var(--orange);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: white; font-weight: 900;
+  }
+  .topbar-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.25); margin: 0 4px; }
+  .topbar-title { color: rgba(255,255,255,0.9); font-size: 15px; font-weight: 500; }
+
+  /* ── NAV ── */
+  .navbar {
+    background: var(--white);
+    border-bottom: 2px solid var(--gray-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 44px;
+  }
+  .nav-links { display: flex; gap: 0; height: 100%; }
+  .nav-link {
+    display: flex; align-items: center;
+    padding: 0 16px;
+    font-size: 13.5px;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color .2s, border-color .2s;
+    white-space: nowrap;
+  }
+  .nav-link.active { color: var(--blue); border-bottom-color: var(--blue); }
+  .nav-link:hover { color: var(--blue); }
+  .nav-icons { display: flex; align-items: center; gap: 18px; color: var(--text-light); cursor: pointer; }
+  .nav-icons svg { width: 18px; height: 18px; }
+
+  /* ── HERO BANNER ── */
+  .hero {
+    background: linear-gradient(135deg, #0d2d50 0%, #1a5090 40%, #1e7bbf 70%, #27a0c8 90%, #3abfb0 100%);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 38px 24px 42px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='160'%3E%3Cellipse cx='680' cy='80' rx='280' ry='110' fill='rgba(255,255,255,0.06)'/%3E%3Cellipse cx='120' cy='140' rx='200' ry='80' fill='rgba(255,255,255,0.04)'/%3E%3C/svg%3E") center/cover no-repeat;
+  }
+  .hero h1 { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #fff; position: relative; letter-spacing: 0.5px; }
+  .hero p { color: rgba(255,255,255,0.85); font-size: 13.5px; margin-top: 8px; position: relative; }
+
+  /* ── MAIN CONTENT ── */
+  .main { max-width: 1100px; margin: 0 auto; padding: 28px 20px 40px; }
+
+  /* ── ACTION CARDS ── */
+  .action-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .action-card {
+    border-radius: 8px;
+    padding: 18px 16px;
+    display: flex; align-items: center; gap: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .action-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+  .action-card.blue { background: var(--blue); }
+  .action-card.orange { background: var(--orange); }
+  .action-card.navy { background: var(--navy); }
+  .action-card.green { background: var(--green); }
+  .action-icon {
+    width: 42px; height: 42px; border-radius: 6px;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 20px;
+  }
+  .action-label { color: white; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; line-height: 1.3; }
+
+  /* ── STAT CARDS ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .stat-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 14px 18px 16px;
+    text-align: center;
+    border-top: 4px solid var(--blue);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  }
+  .stat-card.orange-top { border-top-color: var(--orange); }
+  .stat-card.green-top { border-top-color: var(--green); }
+  .stat-card.teal-top { border-top-color: var(--teal); }
+  .stat-label { font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); margin-bottom: 8px; }
+  .stat-value { font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 700; color: var(--text); }
+  .stat-card.orange-top .stat-label { color: #b85c00; }
+  .stat-card.green-top .stat-label { color: #1e6030; }
+  .stat-card.teal-top .stat-label { color: #0f5a72; }
+
+  /* ── BOTTOM GRID ── */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 22px;
+  }
+  .panel {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 20px 22px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  }
+  .panel-title { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 16px; border-bottom: 2px solid var(--gray-border); padding-bottom: 10px; }
+
+  /* Quick Actions */
+  .qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .qa-btn {
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    transition: background .2s, transform .15s;
+    font-family: 'Open Sans', sans-serif;
+  }
+  .qa-btn:hover { background: #1553a0; transform: translateY(-1px); }
+  .qa-btn .btn-icon { font-size: 14px; }
+
+  /* Announcements */
+  .ann-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--gray-border);
+    font-size: 13px;
+    color: var(--text);
+  }
+  .ann-item:last-child { border-bottom: none; }
+  .ann-dot {
+    width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+    display: flex; align-items: center; justify-content: center; font-size: 10px; color: white;
+  }
+  .ann-dot.info { background: var(--blue); }
+  .ann-dot.success { background: var(--green); }
+  .ann-dot.warn { background: var(--orange); }
+
+  /* ── RESOURCES ── */
+  .resources {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 20px 22px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .res-title { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: var(--navy); margin-right: 8px; }
+  .res-folder {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background: var(--gray-light);
+    cursor: pointer;
+    font-size: 13px; font-weight: 600; color: var(--text);
+    transition: background .2s;
+  }
+  .res-folder:hover { background: #e0e8f4; }
+  .folder-icon { font-size: 18px; }
+  .search-box {
+    margin-left: auto;
+    display: flex; align-items: center;
+    border: 1.5px solid var(--gray-border);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .search-box input {
+    border: none; outline: none; padding: 8px 12px; font-size: 13px;
+    font-family: 'Open Sans', sans-serif; width: 170px; color: var(--text);
+  }
+  .search-box button {
+    background: var(--blue); border: none; padding: 8px 12px; cursor: pointer; color: white; font-size: 13px;
+  }
+
+  @media (max-width: 800px) {
+    .action-grid, .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .bottom-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <div class="logo-icon">B</div>
+    <span>BELLPOINT<br><span style="font-size:10px;font-weight:400;opacity:.8;">ENERGY LIMITED</span></span>
+  </div>
+  <div class="topbar-divider"></div>
+  <span class="topbar-title">Procurement &amp; Supply Chain</span>
+</div>
+
+<!-- NAV -->
+<nav class="navbar">
+  <div class="nav-links">
+    <a class="nav-link active" href="#">Home</a>
+    <a class="nav-link" href="#">Purchase Requests</a>
+    <a class="nav-link" href="#">Vendor Management</a>
+    <a class="nav-link" href="#">Contracts</a>
+    <a class="nav-link" href="#">Tenders</a>
+    <a class="nav-link" href="#">Reports ▾</a>
+  </div>
+  <div class="nav-icons">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Procurement &amp; Supply Chain</h1>
+  <p>Driving value, compliance, and strategic sourcing across Bellpoint Energy Limited.</p>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- ACTION CARDS -->
+  <div class="action-grid">
+    <a class="action-card blue" href="#">
+      <div class="action-icon">🛒</div>
+      <div class="action-label">Submit<br>Purchase Request</div>
+    </a>
+    <a class="action-card orange" href="#">
+      <div class="action-icon">🤝</div>
+      <div class="action-label">Vendor<br>Onboarding</div>
+    </a>
+    <a class="action-card navy" href="#">
+      <div class="action-icon">📋</div>
+      <div class="action-label">Contracts<br>Library</div>
+    </a>
+    <a class="action-card green" href="#">
+      <div class="action-icon">📊</div>
+      <div class="action-label">Procurement<br>Dashboard</div>
+    </a>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Open PRs</div>
+      <div class="stat-value">12</div>
+    </div>
+    <div class="stat-card orange-top">
+      <div class="stat-label">Expiring Contracts (90 Days)</div>
+      <div class="stat-value">5</div>
+    </div>
+    <div class="stat-card green-top">
+      <div class="stat-label">Active Vendors</div>
+      <div class="stat-value">87</div>
+    </div>
+    <div class="stat-card teal-top">
+      <div class="stat-label">YTD Savings</div>
+      <div class="stat-value">$1.2M</div>
+    </div>
+  </div>
+
+  <!-- QUICK ACTIONS + ANNOUNCEMENTS -->
+  <div class="bottom-grid">
+    <div class="panel">
+      <div class="panel-title">Quick Actions</div>
+      <div class="qa-grid">
+        <button class="qa-btn"><span class="btn-icon">✏️</span> Create PR</button>
+        <button class="qa-btn"><span class="btn-icon">🔍</span> Track My Request</button>
+        <button class="qa-btn"><span class="btn-icon">📥</span> Download RFQ Template</button>
+        <button class="qa-btn"><span class="btn-icon">📝</span> Vendor Evaluation Form</button>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Announcements</div>
+      <div class="ann-item">
+        <div class="ann-dot info">ℹ</div>
+        <span>Updated Purchasing Policy Released</span>
+      </div>
+      <div class="ann-item">
+        <div class="ann-dot success">✓</div>
+        <span>New Approved Supplier: Apex Solutions</span>
+      </div>
+      <div class="ann-item">
+        <div class="ann-dot warn">⚠</div>
+        <span>Supplier Risk Alert: XYZ Corp.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESOURCES -->
+  <div class="resources">
+    <span class="res-title">Procurement Resources</span>
+    <div class="res-folder"><span class="folder-icon">📁</span> Policies</div>
+    <div class="res-folder"><span class="folder-icon">📁</span> Templates</div>
+    <div class="res-folder"><span class="folder-icon">📁</span> Contract Docs</div>
+    <div class="res-folder"><span class="folder-icon">📁</span> Tender Docs</div>
+    <div class="search-box">
+      <input type="text" placeholder="Search Documents…">
+      <button>🔍</button>
+    </div>
+  </div>
+
+</main>
+</body>
+</html>
